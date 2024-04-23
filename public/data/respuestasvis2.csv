@@ -32,37 +32,3 @@ Nicolas Wolodarsky,mas de 10km,12,Provincia de Bs As,si,Transporte Propio,m,entr
 Tomas Ward,mas de 10km,12,Provincia de Bs As,si,Transporte Propio,m,entre 30min y 1 hora,50,4,5
 Valentina Vitetta,mas de 10km,12,CABA,no,Bondi,k,mas 1 hora,90,5,5
 Jaime Amigo,mas de 10km,12,Provincia de Bs As,no,Transporte Propio,m,mas 1 hora,90,6,5
-nombre,distName,distancia,Vivis,Prop,Venis,Diteliano,Tiempo,tiempoN
-Mariano Sanson,menos de 1km,1,CABA,no,Caminando,m,Duermo en la heladera de Mingo,1
-Tomas Gallo,menos de 1km,1,CABA,si,Caminando,m,menos de 10min,10
-Nazaret seranusoglu,menos de 1km,1,CABA,si,Transporte Propio,m,entre 10min y 30min,30
-Benjamin Toledo,de 1km a 5km,3,CABA,no,Bondi,m,entre 30min y 1 hora,50
-Camilo Suarez,de 1km a 5km,3,CABA,no,Bondi,k,entre 10min y 30min,30
-Joaqui­n Schanz,de 1km a 5km,3,CABA,no,Bondi,m,entre 30min y 1 hora,50
-Iara Guglielmetti,de 1km a 5km,3,CABA,no,Caminando,k,entre 30min y 1 hora,50
-Estanislao Rios Zgaib,de 1km a 5km,3,CABA,no,Bondi,k,entre 30min y 1 hora,50
-Mariana Zunino,de 1km a 5km,3,CABA,no,Caminando,k,entre 30min y 1 hora,50
-Camila Cauzzo,de 1km a 5km,3,CABA,si,Transporte Propio,m,entre 10min y 30min,30
-Tomas Curzio,de 1km a 5km,3,CABA,no,Bondi,m,entre 10min y 30min,30
-Catalina Dolhare,de 1km a 5km,3,CABA,si,Transporte Propio,m,entre 10min y 30min,30
-Federico Peitti,de 1km a 5km,3,CABA,no,Caminando,m,entre 10min y 30min,30
-Tadeo Yapoudjian,de 1km a 5km,3,CABA,no,Bondi,m,entre 10min y 30min,30
-Valentina Gayo,de 1km a 5km,3,CABA,no,Bondi,k,entre 30min y 1 hora,50
-Guido Salem,de 1km a 5km,3,CABA,si,Transporte Propio,m,entre 10min y 30min,30
-Franco Setti,5km a 10km,5,CABA,no,Subte,m,entre 30min y 1 hora,50
-Ezequiel Grinblat ,5km a 10km,5,Provincia de Bs As,si,Bondi,m,entre 30min y 1 hora,50
-Ivan Mondrzak,5km a 10km,5,CABA,no,Bondi,m,entre 30min y 1 hora,50
-Felipe caracoix,5km a 10km,5,CABA,no,Bondi,m,entre 30min y 1 hora,50
-Carlos Araujo ,5km a 10km,5,CABA,si,Transporte Propio,m,entre 30min y 1 hora,50
-Manuel Milde,5km a 10km,5,CABA,no,Subte,k,entre 30min y 1 hora,50
-Gonzalo Garcia Vence,5km a 10km,5,CABA,si,Transporte Propio,m,entre 30min y 1 hora,50
-Maria Gimenez,5km a 10km,5,CABA,no,Subte,k,entre 30min y 1 hora,50
-Isabel Nuñez ,5km a 10km,5,Provincia de Bs As,no,Bondi,k,mas 1 hora,90
-Emi Verdun,5km a 10km,5,CABA,no,Subte,k,entre 30min y 1 hora,50
-Caterina Villegas,5km a 10km,5,Provincia de Bs As,no,Transporte Propio,k,entre 30min y 1 hora,50
-Lara Barijhoff,5km a 10km,5,CABA,si,Transporte Propio,m,entre 10min y 30min,30
-Serena Marelli,mas de 10km,10,Provincia de Bs As,si,Transporte Propio,m,entre 30min y 1 hora,50
-Nicolas Wolodarsky,mas de 10km,10,Provincia de Bs As,si,Transporte Propio,m,entre 30min y 1 hora,50
-Tomas Ward,mas de 10km,10,Provincia de Bs As,si,Transporte Propio,m,entre 30min y 1 hora,50
-Valentina Vitetta,mas de 10km,10,CABA,no,Bondi,k,mas 1 hora,90
-Jaime Amigo,mas de 10km,10,Provincia de Bs As,no,Transporte Propio,m,mas 1 hora,90
