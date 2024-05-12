@@ -3,6 +3,7 @@
   import {onMount} from "svelte"
   import {scaleLinear} from "d3-scale";
   import AxisX from "./components/AxisX.svelte";
+  import Tooltip from "./components/Tooltip.svelte";
   
 
   // import bsasOverlay from './assets/circuTest.svg';
@@ -28,7 +29,7 @@
   let colorTransporte = d3
     .scaleOrdinal()
     .domain(["Bondi", "Transporte Propio", "Caminando", "Subte"])
-    .range(["#ed334e", "#45C4B0", "#fbb132", "#242F36"])
+    .range(["#ed334e", "#45C4B0", "#0D08F9", "#242F36"])
 
   /* 4. Escala para altura */
   let radioAltura = d3.scaleRadial()
@@ -47,6 +48,8 @@
   let colorDiteliano = d3.scaleOrdinal()
     .domain(["k", "m"])
     .range(["gold", "white"])
+
+  //----------Funciones-para-radio---------
 
   function transvertx(n,radio){
 
@@ -71,6 +74,10 @@
 
   }
   
+  //-----------Hovered---------------------
+
+  let hoveredData;
+  $: console.log(hoveredData);
 
   onMount(() => {
     d3.csv("./data/respuestasvis2.csv", d3.autoType).then(data => {
@@ -84,74 +91,96 @@
       let minMaxAltura = d3.extent(data, d => d.tiempoN)
       radioAltura = radioAltura.domain(minMaxAltura).range([25, 50])
       
-      //------Angulos------------------//
-      // let angles= (360/d.cantidadelementos); 
-      // let ejeXcirc= cos(angles*d.distancia);
-      // let ejeYcirc= sin(angles*d.distancia);
 
       alumnos = data
-      
-    // d3.selectAll(".person-container")
-    //   .data(alumnos)
-    //   .enter()
-    //   .append("div") // Wrap the SVG in a separate div for positioning
-    //     .classed("bsas-overlay-container", d => d.Vivis === "Provincia de Bs As")
-    //     .append(() => {
-    //       const svgContent = new DOMParser().parseFromString(bsasOverlay, "image/svg+xml");
-    //       console.log(svgContent);
-    //       return svgContent.documentElement;
-    //     });
-    
-    // d3.selectAll(".person-container")
-    //   .data(alumnos)
-    //   .enter()
-    //   .append("div") // Wrap the SVG in a separate div for positioning
-    //     .classed("bsas-overlay-container", d => d.Vivis === "Provincia de Bs As")
-    //     .append(() => {
-    //       return document.querySelector("#bsas-overlay").cloneNode(true);
-    //     });
 
-      
     })
   })
 </script>
 
 <main>
-  <div class="header">
-    <div class="logo">
-      <img src="/images/UTDTlog.svg" width="100" alt="logo" />
+  <div class="header1">
+    <div class="header">
+      <div class="logo">
+        <img src="/images/UTDTlog.svg" width="100" alt="logo" />
+      </div>
+      <h3 class="headline">
+        <b>Tu Camino a Ditella</b>
+        <p class="bajada">Comparando como llega cada persona a la Universidad</p>
+      </h3>
+      
     </div>
-    <h3 class="headline">
-      <b>Tu Camino a Ditella</b>
-      <p class="bajada">Comparando como llega cada persona a la Universidad</p>
-    </h3>
-    
   </div>
+  
 
   <div class="parte-b">
     <div class="parte-b-l">
       <div class="glosario">
-
-        <p>Amarillo: Caminando</p>
-        <p>Rojo: Bondi</p>
-        <p>Verde: Transporte Propio</p>
-        <p>Azul Oscuro: Subte</p>
+        <h3 class="reftitle">Referencias</h3>
+        <div class="glosario-ref">
+          <svg class="circulo-glos-svg">
+            <circle class="circulo-glosario"
+            r="10"
+            fill="#0D08F9"
+            cx="50%"
+            cy="50%" />
+          </svg>
+          
+          <p>Caminando</p>
+        </div>
+        <div class="glosario-ref">
+          <svg class="circulo-glos-svg">
+            <circle class="circulo-glosario"
+            r="10"
+            fill="#ed334e"
+            cx="50%"
+            cy="50%" />
+          </svg>
+          <p>Bondi</p>
+        </div>
+        <div class="glosario-ref">
+          <svg class="circulo-glos-svg">
+            <circle class="circulo-glosario"
+            r="10"
+            fill="#45C4B0"
+            cx="50%"
+            cy="50%" />
+          </svg>
+          <p>Transporte Propio</p>
+        </div>
+        <div class="glosario-ref">
+          <svg class="circulo-glos-svg">
+            <circle class="circulo-glosario"
+            r="10"
+            fill="#242F36"
+            cx="50%"
+            cy="50%" />
+          </svg>
+          <p>Subte</p>
+        </div>
+        
     
       </div>
-      <div class="cuerpo">
-
-        <p>Aclaracion</p>
-    
-      </div>
+      
     </div>
     
   
-    <div class="graf-container">
-      <svg class="graf" {width} {height}>
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="graf-container"
+      on:mouseleave={()=>{
+        hoveredData=null;
+      }}>
+    
+      <svg class="graf" >
   
-        <AxisX {height} {xScale} {width} {margin} {yScale}/>
+        <!-- <AxisX {height} {xScale} {width} {margin} {yScale}/> -->
+      
+        <g id="sol">
+          <circle class="utdt" cx="0" cy="0" r="30" fill="yellow" />
+        </g>
+      
        
-        <circle class="utdt" cx="0" cy="0" r="30" fill="yellow"/>
+        
 
         <circle class="radial" cx="0" cy="0" r="60"/>
         <circle class="radial" cx="0" cy="0" r="200"/>
@@ -167,24 +196,76 @@
         <circle class="orbit" cx="0" cy="0" r="480"/>
 
         {#each alumnos as al}
-    
-        <!-- <circle class="orbit" cx="0" cy="0" r={al.distancia*50}/> -->
-    
-        <circle class ="alumnos" cx={(transvertx((al.ejeY),al.distancia)*38)+13} 
-                cy={(transverty(al.ejeY,al.distancia)*40)} 
-                r={al.tiempoN/4}
-                fill = {colorTransporte(al.Venis)}
-                stroke = "wheat" />
-    
-                <!-- <div>
-    
-                  {#each transvert(al.cantidadelementos,al.distancia) as {x,y}}
-                    <div class="small-circle" style="transform: translate({x}px, {y}px);">
-                      <img src="./assets/circuTest.svg" alt=({x},{y}) class="minus">
-                    </div>
-                  {/each}
-                </div> -->
-    
+
+        
+
+            
+    <g class="planet"
+        >
+       <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+      
+       <circle class ="alumnos" cx={(transvertx((al.ejeY),al.distancia)*38)+13} 
+       cy={(transverty(al.ejeY,al.distancia)*40)} 
+       r={hoveredData && hoveredData == al ? (al.tiempoN/2):(al.tiempoN/4)}
+       opacity={hoveredData ? hoveredData == al ? "1" : ".3" : "1"}
+       fill = {colorTransporte(al.Venis)}
+       stroke = "wheat" 
+       stroke-width= "1px"
+       
+       on:mouseover={()=>{
+         hoveredData = al;
+       }}
+       />
+      
+
+      <!-- ----manchas--- -->
+
+      <path class="mancha-overlay" d="M0 14.3036C0 18.0171 3.33276 20.843 6.99635 20.2358L14.8388 18.9361C16.5184 18.6577 18.2413 18.8128 19.8442 19.3866L30.2479 23.1109C33.5236 24.2835 37.174 23.6584 39.8728 21.4627L40.3061 21.1102C42.3291 19.4643 44.9805 18.8061 47.5384 19.3148L50.6981 19.9432C54.4771 20.6947 58 17.8035 58 13.9504V13.9504C58 10.2569 54.7483 7.40786 51.0868 7.89331L46.3844 8.51678C44.5005 8.76655 42.5845 8.47436 40.8607 7.67446L38.0757 6.3821C36.9055 5.83907 35.995 4.8587 35.5398 3.65161V3.65161C34.0782 -0.224184 28.7766 -0.675647 26.6807 2.8972L24.3239 6.91468C22.783 9.5414 19.7477 10.9041 16.7608 10.3101L7.18609 8.40589C3.46698 7.66625 0 10.5116 0 14.3036V14.3036Z" 
+      fill="#EDBC72"
+      fill-opacity={al.Diteliano == "k" ? hoveredData ? hoveredData && hoveredData == al ? "1" :".3" : "1" : "0"}
+      transform="translate({ al.tiempoN == "30" ? 
+          (hoveredData == al ? 
+          (transvertx((al.ejeY),al.distancia)*38)  
+          :(transvertx((al.ejeY),al.distancia)*38)+7) 
+          : (hoveredData == al ? 
+          (transvertx((al.ejeY),al.distancia)*38)-10  
+          :(transvertx((al.ejeY),al.distancia)*38)+2)},
+
+        {hoveredData && hoveredData == al ? 
+          (transverty((al.ejeY),al.distancia)*40)-8
+          :(transverty(al.ejeY,al.distancia)*40)-5}),
+        scale({hoveredData && hoveredData == al ? (al.tiempoN/80):(al.tiempoN/160)})"
+      />
+
+      <!-- ----anillos--- -->
+
+      <path class="anillo-overlay" d="M6.48845 3.23147C-13.2925 -12.7078 26.3684 62.9578 31.4886 34.2315" stroke="wheat" 
+       stroke-linecap="round"
+       
+       transform="translate({ al.tiempoN == "90" ? 
+        (hoveredData == al ?
+          (transvertx((al.ejeY),al.distancia)*38)-32 
+          :(transvertx((al.ejeY),al.distancia)*38)-12) 
+        :(hoveredData == al ?
+          (transvertx((al.ejeY),al.distancia)*38)-12 
+          :(transvertx((al.ejeY),al.distancia)*38))},
+
+       {al.tiempoN == "90" ?
+        (hoveredData == al ? 
+          (transverty((al.ejeY),al.distancia)*40)-40
+          :(transverty((al.ejeY),al.distancia)*40)-18): 
+        (hoveredData == al ?
+          (transverty(al.ejeY,al.distancia)*40)-22
+          :(transverty(al.ejeY,al.distancia)*40)-11)}),
+       scale({hoveredData && hoveredData == al ? (al.tiempoN/40):(al.tiempoN/80)})"
+       stroke-opacity={al.Vivis == "CABA" ? "0" : "1"}
+       
+       
+       />
+
+       
+    </g>
+           
         {/each}
     
         <!-- {#each alumnos as al} ----esta es la version que anda---
@@ -195,11 +276,25 @@
                 stroke = "black" />
     
         {/each} -->
+        
       </svg>
-    
+        {#if hoveredData}
+        <Tooltip data={hoveredData} {transvertx} {transverty}/>
+
+        {/if}
+
+      
+      
   
     </div>
     
+    <div class="cuerpo">
+      <h3>Tu camino a Ditella</h3>
+      <p>En base a los datos recopilados de los alumnos de Visualizacion de Datos, discretizamos en el grafico la distancia a la que vive cada alumno, siendo el "sol" la Universidad. 
+        El tamaño representa el tiempo aproximado en el que tardan en llegar y los colores varian dependiendo del medio de transporte que utilizan para el viaje.
+      </p>
+  
+    </div>
 
   </div>
 
@@ -212,20 +307,26 @@
 <style>
   :global(body) {
     background-color:#1B1B1E;
+    background-image: url("/images/Desktop-2.png");
     
-  } 
+  }
+  .header1 {
+    display: flex;
+    justify-content: center;
+
+  }
   .header {
     display: flex;
     justify-content: center;
   
-    flex-direction: row;
+    flex-direction: column;
     width: auto;
-    height: 200px;
-    margin-top: 50px;
-    margin-bottom: 80px;
+    height: auto;
+    margin-top: 70px;
+    margin-bottom: 10px;
     background-color: #10100E;
     border-radius: 10px;
-    justify-content: space-around;
+    
     
   }
   .headline {
@@ -233,7 +334,7 @@
     line-height: 1.2;
     font-weight: normal;
     text-align: center;
-    margin: 5%;
+    margin: 20px;
     color: wheat;
     
   } 
@@ -242,7 +343,8 @@
     align-content: center;
     align-self: left;
     justify-content: center;
-    margin-top: 5;
+    margin-top: 20px;
+    scale: 80%;
   }
   .bajada {
     font-size: 24px;
@@ -257,7 +359,7 @@
   }
   .parte-b {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 
   }
@@ -265,19 +367,53 @@
     
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
+
+  /* glosario */ 
   .glosario {
-    margin-top: 20px;
-    margin-bottom: 80px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: wheat;
     border-radius: 10px;
     font-family: Helvetica;
     background-color:#10100E;
-    padding: 25px;
+    padding: 5px;
+    justify-content: center;
+    width: auto;
+    fill: #10100E;
+
+  }
+  .reftitle {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+    margin-right: 5px;
+    align-items: center;
+    background-color:#10100E;
+  }
+  .glosario-ref {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+    margin-right: 5px;
+    align-items: center;
+    background-color:#10100E;
     
   }
+  .circulo-glos-svg {
+    width: 40px;
+    height: 40px;
+  }
+  .circulo-glosario {
+    stroke: "wheat" ;
+    stroke-width: "1px";
+
+  }
+
+  /* cuerpo */
   .cuerpo {
     color: wheat;
     border-radius: 10px;
@@ -288,31 +424,62 @@
     padding: 25px;
 
   }
+
+  /* Grafico */
   .graf-container {
     display: flex;
-    margin-left: 10%;
-    flex: 2;
+    flex-direction: column;
+    height: 600px;
+    width: auto;
     background-color: #10100E;
-    justify-content: right;
-    align-items: right;
-    align-content: right;
+    justify-content: center;
+    
+    align-content: center;
     border-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 80px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10%;
+    align-items: flex-start;
+    fill: #1B1B1E;
     
     
   }
+  .ref {
+    color: wheat;
+    
+  }
   .graf {
-    display:flex;
-
+    position: relative;
+    overflow: auto;
+    height: 100%;
+    width: 80%;
+    left: 0;
+    top: 0;
     margin: auto;
     border-radius: 10px;
     background-color:#10100E;
-    scale: 165%;
-    margin-top: 50px;
-    margin-bottom: 80px;
+    scale: 100%;
+    margin-top: px;
+    margin-bottom: 50px;
     padding: 10px;
+  }
+  .utdt {
+    overflow: visible;
+  }
+  .alumnos {
+    transition:all 300ms ease;
+  }
+  .anillo-overlay {
+    stroke-width: 1px;
+    top: 30px;
+    fill-opacity: 0;
+    transition:transform 300ms ease;
+    transition-property: transform;
+    
+  }
+  .mancha-overlay {
+    transition:transform 300ms ease;
+    transition-property: transform;
   }
   
   .radial {
@@ -325,14 +492,13 @@
     color:white;
   }
   .orbit {
-    
-   
+
     fill-opacity: 0%;
     stroke-opacity: 20%;
     stroke: wheat;
-    stroke-width: 2px;
+    stroke-width: 1px;
   
   }
-  
 
 </style>
+
