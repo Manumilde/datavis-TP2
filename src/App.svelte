@@ -6,8 +6,6 @@
   import Tooltip from "./components/Tooltip.svelte";
   
 
-  // import bsasOverlay from './assets/circuTest.svg';
-
   /* Array donde guardaremos la data */
   let alumnos = []
 
@@ -104,8 +102,8 @@
       <div class="logo">
         <img src="/images/UTDTlog.svg" width="100" alt="logo" />
       </div>
-      <h3 class="headline">
-        <b>Tu Camino a Ditella</b>
+      <h3 class="headline" >
+        <b style="color:beige">Tu Camino a Ditella</b>
         <p class="bajada">Comparando como llega cada persona a la Universidad</p>
       </h3>
       
@@ -116,7 +114,7 @@
   <div class="parte-b">
     <div class="parte-b-l">
       <div class="glosario">
-        <h3 class="reftitle">Referencias</h3>
+        <h3 class="reftitle" style="color:beige">Referencias</h3>
         <div class="glosario-ref">
           <svg class="circulo-glos-svg">
             <circle class="circulo-glosario"
@@ -158,6 +156,22 @@
           </svg>
           <p>Subte</p>
         </div>
+        <div class="glosario-ref">
+          <svg class="circulo-glos-svg">
+            <path class="mancha-overlay" d="M0 14.3036C0 18.0171 3.33276 20.843 6.99635 20.2358L14.8388 18.9361C16.5184 18.6577 18.2413 18.8128 19.8442 19.3866L30.2479 23.1109C33.5236 24.2835 37.174 23.6584 39.8728 21.4627L40.3061 21.1102C42.3291 19.4643 44.9805 18.8061 47.5384 19.3148L50.6981 19.9432C54.4771 20.6947 58 17.8035 58 13.9504V13.9504C58 10.2569 54.7483 7.40786 51.0868 7.89331L46.3844 8.51678C44.5005 8.76655 42.5845 8.47436 40.8607 7.67446L38.0757 6.3821C36.9055 5.83907 35.995 4.8587 35.5398 3.65161V3.65161C34.0782 -0.224184 28.7766 -0.675647 26.6807 2.8972L24.3239 6.91468C22.783 9.5414 19.7477 10.9041 16.7608 10.3101L7.18609 8.40589C3.46698 7.66625 0 10.5116 0 14.3036V14.3036Z" 
+              fill="#EDBC72"
+              transform="translate(5,13),scale(.5)"/>
+          </svg>
+          <p>Diteliano</p>
+        </div>
+        <div class="glosario-ref">
+          <svg class="circulo-glos-svg">
+            <path class="anillo-overlay" d="M6.48845 3.23147C-13.2925 -12.7078 26.3684 62.9578 31.4886 34.2315" stroke="wheat" 
+              stroke-linecap="round"
+              transform="scale(.9)"></path>
+          </svg>
+          <p>Vive en Provincia de BA</p>
+        </div>
         
     
       </div>
@@ -176,7 +190,13 @@
         <!-- <AxisX {height} {xScale} {width} {margin} {yScale}/> -->
       
         <g id="sol">
-          <circle class="utdt" cx="0" cy="0" r="30" fill="yellow" />
+          <circle class="utdt" cx="0" cy="0" r="30" fill="yellow" 
+          fill-opacity="1"/>
+          <path d="M10.3352 1L6.38247 9.09016L1 20.1066M10.3352 1L1 20.1066M10.3352 1H17.9091M1 20.1066V22H7.86932M17.9091 1L7.86932 22M17.9091 1H24.9545M7.86932 22H15.267M24.9545 1H32V2.89344M24.9545 1L15.267 22M15.267 22H22.6648M32 2.89344L26.7857 13.5656L22.6648 22M32 2.89344L22.6648 22" 
+          stroke="#F79400"
+          fill-opacity="0"
+          stroke-opacity=".4"
+          transform=translate(-5,0)/>
         </g>
       
        
@@ -194,6 +214,13 @@
         <circle class="orbit" cx="0" cy="0" r="280"/>
         <circle class="orbit" cx="0" cy="0" r="320"/>
         <circle class="orbit" cx="0" cy="0" r="480"/>
+
+        <!-- texto-graf -->
+
+      <text class="texto-graf" x="80%" y="1.7%" fill="beige" font-size="11">Más de 10km</text>
+      <text class="texto-graf" x="41%" y="1.7%" fill="beige" font-size="11">5km a 10km </text>
+      <text class="texto-graf" x="13%" y="1.7%" fill="beige" font-size="11">1km a 5km </text>
+
 
         {#each alumnos as al}
 
@@ -268,17 +295,10 @@
            
         {/each}
     
-        <!-- {#each alumnos as al} ----esta es la version que anda---
-        <circle class ="alumnos" cx={xScale(al.distancia)-12} 
-                cy={yScale(al.ejeY*3.4)} 
-                r={al.tiempoN/4}
-                fill = {colorTransporte(al.Venis)}
-                stroke = "black" />
-    
-        {/each} -->
-        
+      
       </svg>
-        {#if hoveredData}
+        
+      {#if hoveredData}
         <Tooltip data={hoveredData} {transvertx} {transverty}/>
 
         {/if}
@@ -289,10 +309,21 @@
     </div>
     
     <div class="cuerpo">
-      <h3>Tu camino a Ditella</h3>
+      <h3 style="color:beige">Tu camino a Ditella</h3>
       <p>En base a los datos recopilados de los alumnos de Visualizacion de Datos, discretizamos en el grafico la distancia a la que vive cada alumno, siendo el "sol" la Universidad. 
-        El tamaño representa el tiempo aproximado en el que tardan en llegar y los colores varian dependiendo del medio de transporte que utilizan para el viaje.
+        El tamaño representa el tiempo aproximado en el que tardan en llegar y los colores varian dependiendo del medio de transporte que utilizan para el viaje. Si un planeta posee la mancha, significa que el alumno representado usa el "diteliano" para llegar.
+        Si posee anillos, es porque vive en la Provincia de Buenos Aires, caso contrario, el alumno vive en CABA.
       </p>
+      <h3 style="color:beige; text-align:center;">¡Intentá pasar el mouse sobre algún planeta para más info!</h3>
+  
+    </div>
+
+    <div class="cuerpo2">
+      <h3 style="color:beige">Autores</h3>
+      <p>Manuel Milde</p>
+      <p>Gonzalo García Vence</p>
+      <p>Ezequiel Grinblat</p>
+      
   
     </div>
 
@@ -361,7 +392,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    background-color: rgba(14, 14, 15, 0.347);
+    border-radius: 10px;
+    margin-bottom: 10%;
+    
+    
   }
   .parte-b-l {
     
@@ -370,10 +405,10 @@
     justify-content: center;
   }
 
-  /* glosario */ 
+  /* ------------------------------------------------------glosario */ 
   .glosario {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 1px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     color: wheat;
@@ -413,58 +448,67 @@
 
   }
 
-  /* cuerpo */
+  /* ------------------------------------------------------cuerpo */
   .cuerpo {
     color: wheat;
     border-radius: 10px;
     font-family: Helvetica;
     background-color:#10100E;
-    margin-top: 50px;
-    margin-bottom: 80px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 25px;
+
+  }
+  .cuerpo2 {
+    color: wheat;
+    border-radius: 10px;
+    font-family: Helvetica;
+    background-color:#1B1B1E;
+    margin-top: 10px;
+    margin-bottom: 5px;
     padding: 25px;
 
   }
 
-  /* Grafico */
+  /* ------------------------------------------------------Grafico */
   .graf-container {
     display: flex;
     flex-direction: column;
-    height: 600px;
-    width: auto;
+    height: 715px;
+    width: 715px;
     background-color: #10100E;
     justify-content: center;
     
     align-content: center;
     border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 1%;
     align-items: flex-start;
     fill: #1B1B1E;
-    
-    
-  }
-  .ref {
-    color: wheat;
+    margin-left: 21%;
     
   }
   .graf {
     position: relative;
-    overflow: auto;
-    height: 100%;
-    width: 80%;
+    overflow: hidden;
+    height: 510px;
+    width: 510px;
     left: 0;
     top: 0;
     margin: auto;
     border-radius: 10px;
     background-color:#10100E;
-    scale: 100%;
-    margin-top: px;
-    margin-bottom: 50px;
+    scale: 140%;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10px;
+    max-width: 100%;
+    
   }
-  .utdt {
-    overflow: visible;
+  .texto-graf {
+    font-family: Helvetica;
+    
   }
   .alumnos {
     transition:all 300ms ease;
@@ -501,4 +545,3 @@
   }
 
 </style>
-
